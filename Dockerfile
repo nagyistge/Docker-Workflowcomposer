@@ -30,9 +30,10 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 && /etc/init.d/postgresql start \
 && /etc/init.d/rabbitmq-server start \
 && /etc/init.d/mongod \
-&& curl -sSL -O https://brocade.com/bwc/install/install.sh \
-&& chmod +x install.sh \
-&& ./install.sh --user=st2admin --password=${BWC_PASSWORD} --license=$(cat /mykey) \
+&& if [ -s /mykey ]; then \
+  echo "Installing Workflow Composer"; curl -sSL -O https://brocade.com/bwc/install/install.sh ; chmod +x install.sh ; ./install.sh --user=st2admin --password=${BWC_PASSWORD} --license=$(cat /mykey) ; \
+  else echo "Installing stackstorm only" ; curl -sSL -O https://stackstorm.com/packages/install.sh ; chmod +x install.sh ; ./install.sh --user=st2admin --password=${BWC_PASSWORD} ; \
+  fi \
 && rm -f /mykey /install.sh /bwc-installer-deb.sh /st2-community-installer.sh /st2bootstrap-deb.sh \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*

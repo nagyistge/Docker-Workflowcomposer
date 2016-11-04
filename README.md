@@ -6,11 +6,21 @@ This is, of course, not production ready, but very convenient for testing purpos
 
 # Building the container
 
+## Build Brocade Workflow Composer
+
 The procedure is pretty simple:
 
 1. copy your Workflow Composer key into the `./mykey` file
 2. change the environment variable called `BWC_PASSWORD` and set your own BWC password
 3. build the container, using a command like `docker build -t brocade/workflowcomposer $HOME/dockerfiles/brocade_workflowcomposer/`
+
+## Build StackStorm only
+
+The procedure is pretty simple:
+
+1. create an empty `./mykey` file
+2. change the environment variable called `BWC_PASSWORD` and set your own BWC password
+3. build the container, using a command like `docker build -t brocade/stackstorm $HOME/dockerfiles/brocade_workflowcomposer/`
 
 # Using the container
 
