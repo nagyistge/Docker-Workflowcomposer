@@ -14,6 +14,7 @@ ADD mongod.init /etc/init.d/mongod
 ENV BWC_PASSWORD=changeme
 
 RUN export DEBIAN_FRONTEND=noninteractive \
+&& export NO_PROXY=localhost,127.0.0.1,${HOSTNAME} \
 && apt-get update \
 && apt-get dist-upgrade --yes \
 && apt-get install --yes curl vim gnupg-curl openssh-server \
